@@ -5,7 +5,7 @@ namespace SquareFish.Assessment.Domain.Entities
     {
         public BaseEntity()
         {
-            CreateAt = DateTime.Now;
+            CreatedAt = DateTime.Now;
         }
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
