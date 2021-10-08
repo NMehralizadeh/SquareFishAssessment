@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SquareFish.Assessment.Application\SquareFish.Assessment.Application.csproj" />
     <ProjectReference Include="..\SquareFish.Assessment.Infrastructure\SquareFish.Assessment.Infrastructure.csproj" />
+    <ProjectReference Include="..\SquareFish.Assessment.Domain\SquareFish.Assessment.Domain.csproj" />
   </ItemGroup>
 
 </Project>
