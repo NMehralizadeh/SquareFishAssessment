@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Text;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +12,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SquareFish.Assessment.API.Services;
+using SquareFish.Assessment.Application.Bookings.Queries.GetBookingDetails;
 using SquareFish.Assessment.Application.Interfaces;
+using SquareFish.Assessment.Application.Mappings;
+using SquareFish.Assessment.Domain.Entities;
 using SquareFish.Assessment.Infrastructure.Persistence;
 
 namespace SquareFish.Assessment.API
@@ -52,10 +58,13 @@ namespace SquareFish.Assessment.API
 
             services.AddScoped<ILoggedInUserContext, LoggedInUserContext>();
             services.AddHttpContextAccessor();
+
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
+            services.AddMediatR(typeof(GetBookingDetailsQuery).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -71,10 +80,50 @@ namespace SquareFish.Assessment.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            Seed(context);
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void Seed(ApplicationDbContext context)
+        {
+            context.Currencies.AddRange(new List<Currency> {
+                new(){
+                    Id=1,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 110,
+                    Name= "Euro"
+                },
+                new(){
+                    Id=2,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 110,
+                    Name= "Dollar"
+                },
+                new(){
+                    Id=3,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 110,
+                    Name= "IRR"
+                },
+            });
+            context.Bookings.AddRange(new List<Booking>{
+                new(){
+                    Name="Booking 1",
+                    CreatedAt = DateTime.Now,//DateTimeOffset.Now.AddHours(-2),
+                    StartDate = DateTime.Now,//DateTimeOffset.Now.AddDays(+2),
+                    Status= BookingStatus.New,
+                    CreatedBy = 110,
+                    price = 150,
+                    CurrencyId = 1
+                }
+            });
+
+            
+            context.SaveChanges();
         }
     }
 }
