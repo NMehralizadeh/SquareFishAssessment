@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquareFish.Assessment.Appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquareFish.Assessment.Infrastructure", "SquareFish.Assessment.Infrastructure\SquareFish.Assessment.Infrastructure.csproj", "{2D7A18E9-44C6-4C3F-A36B-D9D079E5B11F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquareFish.Assessment.API", "SquareFish.Assessment.API\SquareFish.Assessment.API.csproj", "{6D77851B-D241-45A7-962D-709D4A714AA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,5 +72,17 @@ Global
 		{2D7A18E9-44C6-4C3F-A36B-D9D079E5B11F}.Release|x64.Build.0 = Release|Any CPU
 		{2D7A18E9-44C6-4C3F-A36B-D9D079E5B11F}.Release|x86.ActiveCfg = Release|Any CPU
 		{2D7A18E9-44C6-4C3F-A36B-D9D079E5B11F}.Release|x86.Build.0 = Release|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Debug|x64.Build.0 = Debug|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Debug|x86.Build.0 = Debug|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Release|x64.ActiveCfg = Release|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Release|x64.Build.0 = Release|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D77851B-D241-45A7-962D-709D4A714AA6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

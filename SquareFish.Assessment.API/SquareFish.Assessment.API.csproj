@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityframeworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SquareFish.Assessment.Application\SquareFish.Assessment.Application.csproj" />
+    <ProjectReference Include="..\SquareFish.Assessment.Infrastructure\SquareFish.Assessment.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
