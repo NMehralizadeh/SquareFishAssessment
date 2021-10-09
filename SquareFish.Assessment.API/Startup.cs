@@ -61,6 +61,13 @@ namespace SquareFish.Assessment.API
 
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
             services.AddMediatR(typeof(GetAllBookingQuery).Assembly);
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +83,8 @@ namespace SquareFish.Assessment.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("MyPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
