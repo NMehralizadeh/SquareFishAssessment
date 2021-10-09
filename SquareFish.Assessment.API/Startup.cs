@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SquareFish.Assessment.API.Services;
-using SquareFish.Assessment.Application.Bookings.Queries.GetBookingDetails;
+using SquareFish.Assessment.Application.CQRS.Queries;
 using SquareFish.Assessment.Application.Interfaces;
 using SquareFish.Assessment.Application.Mappings;
 using SquareFish.Assessment.Domain.Entities;
@@ -60,7 +60,7 @@ namespace SquareFish.Assessment.API
             services.AddHttpContextAccessor();
 
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
-            services.AddMediatR(typeof(GetBookingDetailsQuery).Assembly);
+            services.AddMediatR(typeof(GetAllBookingQuery).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

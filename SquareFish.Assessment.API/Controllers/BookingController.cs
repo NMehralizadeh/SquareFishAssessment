@@ -1,19 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SquareFish.Assessment.Application.Bookings.Commands;
-using SquareFish.Assessment.Application.Bookings.Queries;
-using SquareFish.Assessment.Application.Bookings.Queries.GetBookingDetails;
+using SquareFish.Assessment.Application.CQRS.Commands;
+using SquareFish.Assessment.Application.CQRS.Queries;
+using SquareFish.Assessment.Application.Exceptions;
 using SquareFish.Assessment.Application.Interfaces;
-using SquareFish.Assessment.Domain.Entities;
 
 namespace SquareFish.Assessment.API.Controllers
 {
     // [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BookingController : BaseController
     {
         public BookingController(ILoggedInUserContext loggedInUserContext) : base(loggedInUserContext)
@@ -21,71 +19,59 @@ namespace SquareFish.Assessment.API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<BookingDto>> List(int? pageNo)
+        public async Task<IActionResult> List(int? pageNo, int? pageCount)
         {
-            return await Mediator.Send(
-                new GetBookingListQuery
-                {
-                    PageCount = 10,
-                    PageNo = pageNo.HasValue ? pageNo.Value : 0
-                }).ConfigureAwait(false);
+            var query = new GetAllBookingQuery();
+            if (pageCount.HasValue)
+            {
+                query.PageCount = pageCount.Value;
+            }
+            if (pageNo.HasValue)
+            {
+                query.PageNo = pageNo.Value;
+            }
+            return Ok(await Mediator.Send(query));
         }
 
         [HttpGet("{id:int}")]
-        public async Task<BookingDto> Detail(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return await Mediator.Send(
-                new GetBookingDetailsQuery
-                {
-                    BookingId = id
-                }).ConfigureAwait(false);
+            return Ok(await Mediator.Send(new GetBookingByIdQuery { Id = id }));
         }
 
         [HttpPost]
-        public async Task<int> Create(string name,
-                                      DateTime startDate,
-                                      double price,
-                                      BookingStatus status)
+        public async Task<IActionResult> Create(CreateBookingCommand command)
         {
-            return await Mediator.Send(
-                new CreateCommand
-                {
-                    Name = name,
-                    StartDate = startDate,
-                    price = price,
-                    Status = status
-                }
-            ).ConfigureAwait(false);
+            return Ok(await Mediator.Send(command));
         }
 
-        [HttpPut]
-        public async Task<int> Update(int id,
-                                                     string name,
-                                                     DateTime startDate,
-                                                     double price,
-                                                     BookingStatus status)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UpdateBookingCommand command)
         {
-            return await Mediator.Send(
-                new UpdateCommand
-                {
-                    Id = id,
-                    Name = name,
-                    StartDate = startDate,
-                    price = price,
-                    Status = status
-                }
-            ).ConfigureAwait(false);
+            command.Id = id;
+            try
+            {
+                await Mediator.Send(command);
+                return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpDelete]
-        public async Task<int> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return await Mediator.Send(
-                new DeleteCommand
-                {
-                    Id = id
-                }
-            ).ConfigureAwait(false);
+            try
+            {
+                await Mediator.Send(new DeleteBookingByIdCommand { Id = id });
+                return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }
