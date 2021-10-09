@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+      <p class="card-text"></p>
+      <div>Id : {{ booking.id }}</div>
+      <div>name : {{ booking.name }}</div>
+      <div>status : {{ booking.status }}</div>
+      <div>StartDate : {{ booking.StartDate }}</div>
+      <div>price : {{ booking.price }}</div>
+      <div>currencyId : {{ booking.currencyId }}</div>
+      <button (click)="delete(booking.id)">Delete</button>
+      <button routerLink="/booking/item/{{ booking.id }}">Edit</button>
+    </div>
+  </div>
+</div>

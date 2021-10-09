@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+      <p class="card-text"></p>
+      <div>Id : <input [(ngModel)]="booking.id" disabled /></div>
+      <div>name : <input [(ngModel)]="booking.name" /></div>
+      <div>status : <input [(ngModel)]="booking.status" /></div>
+      <div>StartDate : <input [(ngModel)]="booking.StartDate" /></div>
+      <div>price : <input [(ngModel)]="booking.price" /></div>
+      <div>currencyId : <input [(ngModel)]="booking.currencyId" /></div>
+      <button (click)="update(booking.id)">Save</button>
+      <button routerLink="/booking/">Back</button>
+    </div>
+  </div>
+</div>
