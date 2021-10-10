@@ -29,6 +29,6 @@ export class ListBookingComponent implements OnInit {
   }
 
   delete(bookingId : number) {
-    this.bookingServie.deleteBookingById(bookingId);
+    this.bookingServie.deleteBookingById(bookingId).subscribe();
   }
 }

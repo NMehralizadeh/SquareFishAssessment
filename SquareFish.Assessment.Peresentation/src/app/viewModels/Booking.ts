@@ -1,4 +1,4 @@
-export interface Booking {
+export class Booking {
   id: number;
   name: string;
   status: Number;

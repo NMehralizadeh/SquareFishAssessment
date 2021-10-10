@@ -16,26 +16,32 @@ export class AddUpdateBookingComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  booking: Booking;
+
   ngOnInit(): void {
     // this.loginService.login('admin', 'admin').subscribe((r) => {
     // environment.token = r['token'];
+    debugger;
     const { id } = this.route.snapshot.params;
+    if (id === undefined || id == -1) {
+      this.booking = new Booking();
+      this.booking.id = id;
+    }
     this.getBooking(id);
     // });
   }
-  booking: Booking;
   getBooking(bookingId: number) {
+    if (bookingId === undefined || bookingId == -1) return;
     this.bookingServie.getBookingDetailById(bookingId).subscribe((result) => {
       this.booking = result;
     });
   }
 
   update(bookingId: number) {
-    debugger;
-    if (bookingId === undefined || bookingId === 0) {
-      this.bookingServie.createBooking(this.booking);
+    if (bookingId === undefined || bookingId == -1) {
+      this.bookingServie.createBooking(this.booking).subscribe();
     } else {
-      this.bookingServie.updateBooking(bookingId, this.booking);
+      this.bookingServie.updateBooking(bookingId, this.booking).subscribe();
     }
   }
 }

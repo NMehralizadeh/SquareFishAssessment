@@ -39,10 +39,13 @@ export class BookingService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${environment.token}`,
     });
-    return this.http.post<number>(`${this.bookingControllerUrl}api/Booking/`, {
+    return this.http.post<number>(
+      `${this.bookingControllerUrl}api/Booking/`,
       booking,
-      headers: headers,
-    });
+      {
+        headers: headers,
+      }
+    );
   }
 
   updateBooking(bookingId: number, booking: Booking): Observable<number> {
@@ -51,8 +54,8 @@ export class BookingService {
     });
     return this.http.put<number>(
       `${this.bookingControllerUrl}api/Booking/${bookingId}`,
+      booking,
       {
-        booking,
         headers: headers,
       }
     );

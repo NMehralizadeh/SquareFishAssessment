@@ -7,7 +7,7 @@ import { ViewBookingComponent } from './components/booking/view-booking/view-boo
 const routes: Routes = [
   { path: 'booking', component: ListBookingComponent },
   { path: 'booking/item/:id', component: AddUpdateBookingComponent },
-  { path: 'booking/:id', component: ViewBookingComponent },
+  { path: 'booking/view/:id', component: ViewBookingComponent },
 ];
 
 @NgModule({

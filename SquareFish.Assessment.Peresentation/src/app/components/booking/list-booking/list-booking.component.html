@@ -3,7 +3,7 @@
     <div class="card-body">
       <h5 class="card-title"></h5>
       <p class="card-text"></p>
-      <button routerLink="/booking/item/0">New</button>
+      <button routerLink="/booking/item/-1">New</button>
       <table>
         <tr>
           <th>Id</th>
@@ -24,7 +24,7 @@
           <td>
             <button (click)="delete(booking.id)">Delete</button>
             <button routerLink="/booking/item/{{ booking.id }}">Edit</button>
-            <button routerLink="/booking/{{ booking.id }}">View</button>
+            <button routerLink="/booking/view/{{ booking.id }}">View</button>
           </td>
         </tr>
       </table>
