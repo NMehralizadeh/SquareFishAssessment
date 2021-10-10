@@ -60,7 +60,7 @@ namespace SquareFish.Assessment.API.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try

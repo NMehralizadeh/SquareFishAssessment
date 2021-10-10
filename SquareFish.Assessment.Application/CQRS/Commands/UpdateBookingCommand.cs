@@ -13,7 +13,7 @@ namespace SquareFish.Assessment.Application.CQRS.Commands
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public BookingStatus Status { get; set; }
+        public int Status { get; set; }
         public DateTime StartDate { get; set; }
         public double price { get; set; }
         public int CurrencyId { get; set; }
@@ -37,13 +37,13 @@ namespace SquareFish.Assessment.Application.CQRS.Commands
                     throw new NotFoundException($"Booking With Id {request.Id} is not available in Database!");
                 }
 
-                if (booking.Status == BookingStatus.Accepted && request.Status != BookingStatus.Accepted)
+                if (booking.Status == BookingStatus.Accepted && (BookingStatus)request.Status != BookingStatus.Accepted)
                 {
                     throw new BusinessConditionException($"Can not change status of Accepted to other states!");
                 }
 
                 booking.Name = request.Name;
-                booking.Status = request.Status;
+                booking.Status = (BookingStatus)request.Status;
                 booking.StartDate = request.StartDate;
                 booking.CurrencyId = request.CurrencyId;
                 booking.UpdatedAt = DateTime.Now;

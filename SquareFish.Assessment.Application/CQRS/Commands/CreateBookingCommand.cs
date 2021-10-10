@@ -10,7 +10,7 @@ namespace SquareFish.Assessment.Application.CQRS.Commands
     public class CreateBookingCommand : IRequest<int>
     {
         public string Name { get; set; }
-        public BookingStatus Status { get; set; }
+        public int Status { get; set; }
         public DateTime StartDate { get; set; }
         public double price { get; set; }
         public int CurrencyId { get; set; }
@@ -32,7 +32,7 @@ namespace SquareFish.Assessment.Application.CQRS.Commands
                 var booking = new Booking()
                 {
                     Name = request.Name,
-                    Status = request.Status,
+                    Status = (BookingStatus)request.Status,
                     StartDate = request.StartDate,
                     CurrencyId = request.CurrencyId,
                     CreatedBy = _loggedInUserContext.Id
