@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  service:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes: 
+      - appdata:/root/.aspnet/DataProtection-Keys
+  presentation:
+    build: ./SquareFish.Assessment.Peresentation/
+    ports: 
+      - "4200:80"
+volumes:
+  appdata:
