@@ -60,7 +60,8 @@ namespace SquareFish.Assessment.API
             services.AddHttpContextAccessor();
 
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
-            services.AddMediatR(typeof(GetAllBookingQuery).Assembly);
+            services.AddMediatR(config =>
+                config.RegisterServicesFromAssemblies(typeof(GetAllBookingQuery).Assembly));
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -97,7 +98,7 @@ namespace SquareFish.Assessment.API
             });
         }
 
-        private void Seed(ApplicationDbContext context)
+        private static void Seed(ApplicationDbContext context)
         {
             context.Currencies.AddRange(new List<Currency> {
                 new(){
@@ -131,7 +132,7 @@ namespace SquareFish.Assessment.API
                 }
             });
 
-            
+
             context.SaveChanges();
         }
     }
